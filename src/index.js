@@ -12,7 +12,7 @@ const App = () => {
     ];
 
     return(
-        <div>
+        <div className='container'>
             <span>{ (new Date()).toString() }</span>
         <AppHeader />
         <SerchPanel />

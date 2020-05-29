@@ -2,7 +2,7 @@ import React from 'react';
 
 const SerchPanel = () => {
     return(
-        <input placeholder='serch' />
+        <input className='form-control mb-3 ml-4' placeholder='serch' />
     );
 }
 
