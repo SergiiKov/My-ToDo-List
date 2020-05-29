@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import TodoList from './components/todo-list';
 import AppHeader from './components/app-header';
 import SerchPanel from './components/serch-panel';
+import ItemStatusFilter from './components/item-status-filter';
 
 const App = () => {
     const todoData = [
@@ -15,6 +16,7 @@ const App = () => {
             <span>{ (new Date()).toString() }</span>
         <AppHeader />
         <SerchPanel />
+        <ItemStatusFilter />
         <TodoList todos={todoData}/>
     </div>  
     );
