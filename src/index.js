@@ -1,34 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TodoList from './components/todo-list';
+import AppHeader from './components/app-header';
+import SerchPanel from './components/serch-panel';
 
-const TodoList = () => {
-    return(
-        <div>
-        <ul>
-            <li>1</li>
-            <li>2</li>
-        </ul>
-    </div>
-    );
-}
 
-const AppHeader = () => {
-    return(
-        <div>
-             <h1>My to do list</h1> 
-        </div>
-    );
-}
 
-const SerchPanel = () => {
-    return(
-        <input placeholder='serch' />
-    );
-}
 
 const App = () => {
     return(
         <div>
+            <span>{ (new Date()).toString() }</span>
         <AppHeader />
         <SerchPanel />
         <TodoList />
