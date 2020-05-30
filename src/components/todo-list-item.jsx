@@ -7,40 +7,47 @@ class TodoListItem extends React.Component {
         super();
 
         this.state = {
-            done: false  
+            done: false,
+            important: false  
         };
 
         this.onLabelClick = () => {
-           this.setState({
-               done:true 
+           this.setState(({done})=>{
+               return {
+                   done: !done
+               }
            });
         }
+        this.onMarkImportant =() => {
+            this.setState((state)=>{
+                return {
+                    important: !state.important  
+                }
+            });
+        };
     }
    
     render () 
         {
-            const { done } = this.state;
-            const { label, important = false } = this.props;
-            let classNames = 'todo-list-item';
+            const { done, important } = this.state;
+            const { label, onDeleted } = this.props;
+            let classNamesStyle = 'todo-list-item';
                 if (done) {
-                    classNames += ' done';
+                    classNamesStyle += ' done';
+                }
+                if (important) {
+                    classNamesStyle += ' important';
                 }
 
-            const styleList = {
-                color: important ? 'red' : 'black',
-                fontWeight: important ? '800' : '400'   
-            };
-        
             return(
                 <div className=''>
                       <span 
-                        className={classNames}
-                        style={styleList} 
+                        className={classNamesStyle}
                         onClick={this.onLabelClick}>
                             { label }
                       </span>
-            <button type='button' className='btn btn-info mx-2'><i className='fa fa-exclamation' /></button> 
-            <button type='button' className='btn btn-danger'><i className='fa fa-trash-o' /></button>   
+            <button onClick={this.onMarkImportant} type='button' className='btn btn-info mx-2'><i className='fa fa-exclamation' /></button> 
+            <button onClick={onDeleted} type='button' className='btn btn-danger'><i className='fa fa-trash-o' /></button>   
             
                 </div>
             );
