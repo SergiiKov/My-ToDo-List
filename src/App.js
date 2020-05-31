@@ -10,10 +10,19 @@ class App extends React.Component {
     maxId= 100;
     state = {
          todoData: [
-            { label:'Build App', important: true, id: 1 },
-            { label:'Learn React', important: false, id: 2 }
+           this.createTodoItem('drinkc koffe'),
+           this.createTodoItem('learn react'),
         ]
     };
+
+createTodoItem (label) {
+    return{
+        label,
+        import:false,
+        done: false,
+        id: this.maxId++  
+    }
+}
 
     deleteItem = (id) =>{
         this.setState(({todoData})=>{
@@ -29,11 +38,7 @@ class App extends React.Component {
     };
 
     addItem = () =>{
-        const newItem = {
-            label:Text,
-            import:false,
-            id: this.maxId++
-        };
+        const newItem =  this.createTodoItem(Text);
         this.setState (({todoData}) =>{
             const newArr = [
                 ...todoData,
