@@ -4,8 +4,10 @@ import TodoList from './components/todo-list';
 import AppHeader from './components/app-header';
 import SerchPanel from './components/serch-panel';
 import ItemStatusFilter from './components/item-status-filter';
+import ItemAddForm from './components/item-add-form';
 
 class App extends React.Component {
+    maxId= 100;
     state = {
          todoData: [
             { label:'Build App', important: true, id: 1 },
@@ -17,14 +19,31 @@ class App extends React.Component {
         this.setState(({todoData})=>{
         const idx = todoData.findIndex((el) => el.id===id);
         const newArray = [
-            ...todoData.splice(0, idx),
-            ...todoData.splice(idx + 1) 
+            ...todoData.slice(0, idx),
+            ...todoData.slice(idx + 1) 
         ];
         return {
             todoData: newArray
         }
         });
     };
+
+    addItem = () =>{
+        const newItem = {
+            label:Text,
+            import:false,
+            id: this.maxId++
+        };
+        this.setState (({todoData}) =>{
+            const newArr = [
+                ...todoData,
+                newItem
+            ];
+            return {
+                todoData:newArr
+            };
+        }); 
+    }
 
     render(){
         return(
@@ -37,6 +56,7 @@ class App extends React.Component {
                 todos={this.state.todoData}
                 onDeleted={this.deleteItem}
             />
+            <ItemAddForm addItem={this.addItem}/>
         </div>  
         );
     }
