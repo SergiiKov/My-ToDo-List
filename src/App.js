@@ -45,6 +45,13 @@ class App extends React.Component {
         }); 
     }
 
+    onToggleImportant = (id) =>{
+
+    }
+    onToggleDone = (id) =>{
+
+    }
+
     render(){
         return(
             <div className='container'>
@@ -55,6 +62,8 @@ class App extends React.Component {
             <TodoList 
                 todos={this.state.todoData}
                 onDeleted={this.deleteItem}
+                onToggleImportant={this.onToggleImportant}
+                onToggleDone={this.onToggleDone}
             />
             <ItemAddForm addItem={this.addItem}/>
         </div>  
