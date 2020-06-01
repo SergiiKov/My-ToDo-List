@@ -24,6 +24,7 @@ createTodoItem (label) {
     }
 };
 
+
     deleteItem = (id) =>{
         this.setState(({todoData})=>{
         const idx = todoData.findIndex((el) => el.id===id);
@@ -37,7 +38,7 @@ createTodoItem (label) {
         });
     };
 
-    addItem = () =>{
+    addItem = (Text) =>{
         const newItem =  this.createTodoItem(Text);
         this.setState (({todoData}) =>{
             const newArr = [
