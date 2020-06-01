@@ -17,7 +17,7 @@ class TodoListItem extends React.Component {
                 }
 
             return(
-                <div className=''>
+                <div>
                       <span 
                         className={classNamesStyle}
                         onClick={onToggleDone}>

@@ -22,18 +22,18 @@ createTodoItem (label) {
         done: false,
         id: this.maxId++  
     }
-}
+};
 
     deleteItem = (id) =>{
         this.setState(({todoData})=>{
         const idx = todoData.findIndex((el) => el.id===id);
-        const newArray = [
-            ...todoData.slice(0, idx),
-            ...todoData.slice(idx + 1) 
-        ];
-        return {
-            todoData: newArray
-        }
+            const newArray = [
+                ...todoData.slice(0, idx),
+                ...todoData.slice(idx + 1) 
+            ];
+                return {
+                    todoData: newArray
+                };
         });
     };
 
@@ -44,26 +44,50 @@ createTodoItem (label) {
                 ...todoData,
                 newItem
             ];
-            return {
-                todoData:newArr
-            };
+                return {
+                    todoData:newArr
+                };
         }); 
     }
 
     onToggleImportant = (id) =>{
+        this.setState(({todoData})=>{
+            return {
+             todoData: this.toggleProperty(todoData, id, 'important')
+            };
+         });
+    };
 
-    }
-    onToggleDone = (id) =>{
+toggleProperty(arr, id, propName) {
+    const idx = arr.findIndex((el) => el.id===id);
+    const oldItem = arr[idx];
+    const newItem = {...oldItem, [propName]: !oldItem[propName]};
+        return [
+            ...arr.slice(0, idx),
+            newItem,
+            ...arr.slice(idx + 1) 
+        ]; 
+};
 
-    }
+onToggleDone = (id) =>{
+    this.setState(({todoData})=>{
+        return {
+            todoData: this.toggleProperty(todoData, id, 'done')
+        };
+    });
+};
 
     render(){
+      const  doneCount = this.state.todoData.filter((el)=>el.done).length;
+      const  todoCount = this.state.todoData.length - doneCount;
         return(
             <div className='container'>
-                <span>{ (new Date()).toString() }</span>
-            <AppHeader />
+           
+            <AppHeader toDo={todoCount} done={doneCount} />
+            <div className='d-flex'> 
             <SerchPanel />
             <ItemStatusFilter />
+            </div>
             <TodoList 
                 todos={this.state.todoData}
                 onDeleted={this.deleteItem}
@@ -74,6 +98,6 @@ createTodoItem (label) {
         </div>  
         );
     }
-}
+};
 
 export default App;
