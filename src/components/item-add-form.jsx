@@ -17,6 +17,7 @@ this.setState({
     onSubmit = (e) =>{
         e.preventDefault();
         this.props.addItem(this.state.label)
+        this.setState({label:''})
             };
 
     render () 
@@ -27,7 +28,8 @@ this.setState({
                 <input  type='text' 
                         className='form-control' 
                         onChange={this.onlabelChange} 
-                        placeholder='What need to be done' />
+                        placeholder='What need to be done'
+                        value={this.state.label} />
                 <button className='btn btn-outline-secondary mt-2'>Add item</button>
             </form>
         );
