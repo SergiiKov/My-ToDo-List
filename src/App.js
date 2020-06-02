@@ -12,7 +12,8 @@ class App extends React.Component {
          todoData: [
            this.createTodoItem('drinkc koffe'),
            this.createTodoItem('learn react'),
-        ]
+        ],
+        term:''
     };
 
 createTodoItem (label) {
@@ -77,8 +78,20 @@ onToggleDone = (id) =>{
         };
     });
 };
-
+onSercheChange = (term) =>{
+this.setState({term});
+}
+search(items, term){
+    if (term.length === 0) {
+        return items;
+    }
+return items.filter((item)=>{
+    return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
+})
+}
     render(){
+        const { todoData, term} =this.state;
+        const visibleItems = this.search(todoData, term);
       const  doneCount = this.state.todoData.filter((el)=>el.done).length;
       const  todoCount = this.state.todoData.length - doneCount;
         return(
@@ -86,11 +99,11 @@ onToggleDone = (id) =>{
            
             <AppHeader toDo={todoCount} done={doneCount} />
             <div className='d-flex'> 
-            <SerchPanel />
+            <SerchPanel onSercheChange={this.onSercheChange}/>
             <ItemStatusFilter />
             </div>
             <TodoList 
-                todos={this.state.todoData}
+                todos={visibleItems}
                 onDeleted={this.deleteItem}
                 onToggleImportant={this.onToggleImportant}
                 onToggleDone={this.onToggleDone}
