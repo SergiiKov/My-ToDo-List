@@ -89,6 +89,7 @@ return items.filter((item)=>{
     return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
 })
 }
+
     render(){
         const { todoData, term} =this.state;
         const visibleItems = this.search(todoData, term);
